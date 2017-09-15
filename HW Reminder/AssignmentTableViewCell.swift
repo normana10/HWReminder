@@ -15,6 +15,10 @@ class AssignmentTableViewCell: UITableViewCell {
     @IBOutlet weak var DaysLeftCounter: UILabel!
     @IBOutlet weak var AssignmentClassImage: UIImageView!
     @IBOutlet weak var DaysLeftView: UIView!
+    @IBOutlet weak var dueDateLabel: UILabel!
+    @IBOutlet weak var importance: UIImageView!
+    
+    var dueDate: Date?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

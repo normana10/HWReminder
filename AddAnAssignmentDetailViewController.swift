@@ -30,6 +30,7 @@ class AddAnAssignmentDetailViewController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var repeatDatePicker: UIDatePicker!
     @IBOutlet weak var RepeatSwitch: UISwitch!
+    @IBOutlet weak var importantChooser: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +77,7 @@ class AddAnAssignmentDetailViewController: UIViewController, UITextFieldDelegate
         if button != saveButton {
             return
         }
-        newAssignment = Assignment(name: assignmentName.text!, className: newClass!.shortName, dueDate: assignmentDate.date)
+        newAssignment = Assignment(name: assignmentName.text!, className: newClass!.shortName, dueDate: assignmentDate.date, important: importantChooser.selectedSegmentIndex)
         repeating = RepeatSwitch.isOn
         repeatTo = repeatDatePicker.date
     }

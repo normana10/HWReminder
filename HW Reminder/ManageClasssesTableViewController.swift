@@ -179,9 +179,9 @@ class ManageClasssesTableViewController: UITableViewController {
         let date2 = Date().addingTimeInterval(oneDay*7)
         let date3 = Date().addingTimeInterval(oneDay*14)
         
-        let assign1 = Assignment(name: "Project 6", className: "CS 220", dueDate: date1)
-        let assign2 = Assignment(name: "Take notes on Ch 6", className: "CS 220", dueDate: date2)
-        let assign3 = Assignment(name: "TEST", className: "MATH 233", dueDate: date3)
+        let assign1 = Assignment(name: "Project 6", className: "CS 220", dueDate: date1, important: 0)
+        let assign2 = Assignment(name: "Take notes on Ch 6", className: "CS 220", dueDate: date2, important: 1)
+        let assign3 = Assignment(name: "TEST", className: "MATH 233", dueDate: date3, important: 1)
         assigns += [assign1, assign2, assign3]
         return assigns
     }

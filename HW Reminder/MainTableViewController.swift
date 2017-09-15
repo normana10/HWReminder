@@ -17,6 +17,7 @@ class MainTableViewController: UITableViewController {
     var alerts = [Alert]()
     var newAssignment: Assignment?
     var notificationsEnabled = false
+    var editingAssignmentAt = -1;
     
     @IBAction func Refresh(_ sender: Any) {
         self.tableView.reloadData()
@@ -42,7 +43,7 @@ class MainTableViewController: UITableViewController {
             classes += loadSampleClasses()
             saveClasses()
         }
-        
+        assignments.sort(by: {$0.dueDate < $1.dueDate})
         //        NotificationCenter.default.addObserver(self, selector: "appBecomeActive", name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         
         if #available(iOS 10.0, *){
@@ -218,7 +219,7 @@ class MainTableViewController: UITableViewController {
                 let daysFromNow = DaysLeft(assignment: assign)
                 if daysFromNow <= 7 && daysFromNow > 0{
                     assignmentsByDay[daysFromNow].append(assign)
-                    print("Adding \(assign.name) because it's due \(daysFromNow) days from now, making \(assignmentsByDay[daysFromNow].count) now due on that day")
+//                    print("Adding \(assign.name) because it's due \(daysFromNow) days from now, making \(assignmentsByDay[daysFromNow].count) now due on that day")
                 }
             }
             //            print("\n\n\n")
@@ -268,24 +269,24 @@ class MainTableViewController: UITableViewController {
                             //                                                        UNUserNotificationCenter.current().add(request)
                             notifCenter.add(request, withCompletionHandler: nil)
                             
-                            print("Alert Added for \(assignsForThisDay.first!.name) with unique ID: HWReminder.alert.\(daysFromNow).\(alertNum)")
-                            print("\tdue on \(dateFormat.string(from: assignDate))")
-                            print("\tso alert will be on \(dateFormat.string(from: trigDate.date!))")
+//                            print("Alert Added for \(assignsForThisDay.first!.name) with unique ID: HWReminder.alert.\(daysFromNow).\(alertNum)")
+//                            print("\tdue on \(dateFormat.string(from: assignDate))")
+//                            print("\tso alert will be on \(dateFormat.string(from: trigDate.date!))")
                         }
                     }
                     alertNum += 1
                 }
                 daysFromNow += 1
             }
-            print("\n\n\nSo just to recap alerts:")
+//            print("\n\n\nSo just to recap alerts:")
             notifCenter.getPendingNotificationRequests(completionHandler: {(lst) in
-                print("There are: \(lst.count) notifications\n")
-                for notif in lst {
-                    print("\t\(notif.content.title)")
-                    print("\(notif.content.subtitle)")
-                    print("\(notif.content.body)")
-                    print("\((notif.trigger as! UNCalendarNotificationTrigger).dateComponents)")
-                }
+//                print("There are: \(lst.count) notifications\n")
+//                for notif in lst {
+//                    print("\t\(notif.content.title)")
+//                    print("\(notif.content.subtitle)")
+//                    print("\(notif.content.body)")
+//                    print("\((notif.trigger as! UNCalendarNotificationTrigger).dateComponents)")
+//                }
             }
             )
         }
@@ -293,15 +294,24 @@ class MainTableViewController: UITableViewController {
     
     @IBAction func unwindToMain(sender: UIStoryboardSegue){
         if let source = sender.source as? AddAnAssignmentDetailViewController, let newAssignment = source.newAssignment {
-            let newIndexPath = IndexPath(row: assignments.count, section: 0)
+//            let newIndexPath = IndexPath(row: assignments.count, section: 0)
             //            newAssignment.dueDate =
             assignments.append(newAssignment)
             
+            if source.RepeatSwitch.isOn == true {
+                let secondsInWeek = 60*60*24*7*1.0
+                var workingDate = newAssignment.dueDate.addingTimeInterval(secondsInWeek)
+                let targetDate = source.repeatDatePicker.date
+                while workingDate < targetDate {
+                    let weeklyAssignment = Assignment(name: newAssignment.name, className: newAssignment.className, dueDate: workingDate, important: newAssignment.important)
+                    assignments.append(weeklyAssignment)
+                    workingDate.addTimeInterval(secondsInWeek)
+                }
+            }
+            //TODO CHECK IF REPEATING AND ADD REPEATED TO ASSIGNMENT LIST
             
-            //CHECK IF REPEATING AND ADD REPEATED TO ASSIGNMENT LIST
             
-            
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+//            tableView.insertRows(at: [newIndexPath], with: .automatic)
             assignments.sort(by: {$0.dueDate < $1.dueDate})
             tableView.reloadData()
             saveAssignments()
@@ -333,6 +343,35 @@ class MainTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func unwindToMainFromEditAssignment(sender: UIStoryboardSegue){
+        
+        let sentFrom = sender.source as! EditExistingAssignmentViewController;
+        
+//        let editingAssignment = assignments[editingAssignmentAt];
+        assignments[editingAssignmentAt].name = sentFrom.newAssignmentName.text!;
+        assignments[editingAssignmentAt].dueDate = sentFrom.dueDate.date;
+        assignments[editingAssignmentAt].important = sentFrom.importantPicker.selectedSegmentIndex;
+//        print("THE SELECTED SEGMENT IS:", sentFrom.importantPicker.selectedSegmentIndex);
+//        print("Does edited assignment say it's important:     And the saved assignment: ", assignments[editingAssignmentAt].important);
+        
+//        assignments[editingAssignmentAt] = editingAssignment;
+        
+        assignments.sort(by: {$0.dueDate < $1.dueDate})
+        tableView.reloadData();
+        saveAssignments()
+//        print("Does edited assignment say it's important:     And the saved assignment: ", assignments[editingAssignmentAt].important);
+        assignments = loadAssignments()!;
+//        print("Does edited assignment say it's important:     And the saved assignment: ", assignments[editingAssignmentAt].important);
+        
+        
+        if #available(iOS 10.0, *) {
+            updateAlertNotifications()
+            updateBadgeNumber();
+        } else {
+            // Fallback on earlier versions
+        };
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -350,13 +389,14 @@ class MainTableViewController: UITableViewController {
     
     private func DaysLeft(assignment: Assignment) -> Int{
         let assignDate = assignment.dueDate
-        //        let calendar = Calendar.current
-        //        let midnightAssignmentDate = calendar.startOfDay(for: assignDate)
+        let calendar = Calendar.current
+        let midnightAssignmentDate = calendar.startOfDay(for: assignDate)
         
-        let secondsInDay = Double(60*60*24)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
-        let daysLeft = ceil(assignDate.timeIntervalSinceNow/secondsInDay)
+        let secondsInDay = Double(60*60*24);
+//        midnightAssignmentDate.addTimeInterval(secondsInDay);
+//        let dateFormatter = DateFormatter();
+        let daysLeft = ceil(midnightAssignmentDate.timeIntervalSinceNow/secondsInDay)
+        //        dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
         //        print("Named: \(assignment.name) is due on \(dateFormatter.string(from: assignDate)) Today is: \(dateFormatter.string(from: Date())) so the assignment is due in \(daysLeft) days")
         
         //        return Int(midnightAssignmentDate.timeIntervalSinceNow/secondsInDay)
@@ -438,6 +478,17 @@ class MainTableViewController: UITableViewController {
             blue = blue/255
         }
         cell.DaysLeftView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1)
+        
+        let dFormat = DateFormatter();
+        dFormat.dateFormat = "MM-dd-yy";
+        cell.dueDateLabel.text = dFormat.string(from: assignment.dueDate);
+        cell.dueDate = assignment.dueDate;
+        print("TABLE RELOADING, IS THIS CELL IMPORTANT: ", assignment.important);
+        if assignment.important == 1 {
+            cell.importance.isHidden = false;
+        } else {
+            cell.importance.isHidden = true;
+        }
         // Configure the cell...
         
         //        print("Adding: \(assignment.name)   due date: \(assignment.dueDate)   midnight due date:\(midnightAssignmentDate)   assignment is due in:\(midnightAssignmentDate.timeIntervalSinceNow)")
@@ -499,15 +550,26 @@ class MainTableViewController: UITableViewController {
      }
      */
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        guard let sentBy = sender as? AssignmentTableViewCell else {
+            return;
+        }
+        editingAssignmentAt = (tableView.indexPath(for: sentBy)?.row)!;
+        let editingAssignment = assignments[editingAssignmentAt];
+        
+        let movingTo = segue.destination as! EditExistingAssignmentViewController;
+        
+        movingTo.currAssignment = editingAssignment;
+        movingTo.currClassImage = classes.first(where: {$0.shortName == editingAssignment.className})?.image ?? UIImage(named: "classDNE")!
+        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
      }
-     */
+ 
     
     private func loadSampleAssignments() -> [Assignment]{
         var assigns = [Assignment]()
@@ -518,9 +580,9 @@ class MainTableViewController: UITableViewController {
         let date2 = Date().addingTimeInterval(oneDay*7)
         let date3 = Date().addingTimeInterval(oneDay*14)
         
-        let assign1 = Assignment(name: "Project 6", className: "CS 220", dueDate: date1)
-        let assign2 = Assignment(name: "Take notes on Ch 6", className: "CS 220", dueDate: date2)
-        let assign3 = Assignment(name: "TEST", className: "MATH 233", dueDate: date3)
+        let assign1 = Assignment(name: "Project 6", className: "CS 220", dueDate: date1, important: 0)
+        let assign2 = Assignment(name: "Take notes on Ch 6", className: "CS 220", dueDate: date2, important: 1)
+        let assign3 = Assignment(name: "TEST", className: "MATH 233", dueDate: date3, important: 1)
         assigns += [assign1, assign2, assign3]
         return assigns
     }

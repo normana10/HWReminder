@@ -378,13 +378,14 @@ class AlertsListTableViewController: UITableViewController {
     }
     private func DaysLeft(assignment: Assignment) -> Int{
         let assignDate = assignment.dueDate
-        //        let calendar = Calendar.current
-        //        let midnightAssignmentDate = calendar.startOfDay(for: assignDate)
+        let calendar = Calendar.current
+        let midnightAssignmentDate = calendar.startOfDay(for: assignDate)
         
-        let secondsInDay = Double(60*60*24)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
-        let daysLeft = ceil(assignDate.timeIntervalSinceNow/secondsInDay)
+        let secondsInDay = Double(60*60*24);
+        //        midnightAssignmentDate.addTimeInterval(secondsInDay);
+        //        let dateFormatter = DateFormatter();
+        let daysLeft = ceil(midnightAssignmentDate.timeIntervalSinceNow/secondsInDay)
+        //        dateFormatter.dateFormat = "MM-dd-yyyy hh:mm"
         //        print("Named: \(assignment.name) is due on \(dateFormatter.string(from: assignDate)) Today is: \(dateFormatter.string(from: Date())) so the assignment is due in \(daysLeft) days")
         
         //        return Int(midnightAssignmentDate.timeIntervalSinceNow/secondsInDay)

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HW Reminder/MainTableViewController.swift"
-            timestampString = "506916103.842412"
+            timestampString = "507155354.731841"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "updateAlertNotifications()"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,27 +26,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HW Reminder/MainTableViewController.swift"
-            timestampString = "506916103.842412"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "updateAlertNotifications()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "HW Reminder/MainTableViewController.swift"
-            timestampString = "506916103.842412"
+            timestampString = "507155354.731841"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "216"
             endingLineNumber = "216"
+            landmarkName = "updateAlertNotifications()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HW Reminder/MainTableViewController.swift"
+            timestampString = "507155354.731841"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "updateAlertNotifications()"
             landmarkType = "7">
          </BreakpointContent>

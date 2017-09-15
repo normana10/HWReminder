@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		9B086CA91E33DD36001B6B5D /* EditClassIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B086CA81E33DD36001B6B5D /* EditClassIconCollectionViewCell.swift */; };
 		9B13D94C1E3151B200DBA3F7 /* ClassDetailViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B13D94B1E3151B200DBA3F7 /* ClassDetailViewViewController.swift */; };
+		9B209E001E3A705B0099E71A /* EditExistingAssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B209DFF1E3A705B0099E71A /* EditExistingAssignmentViewController.swift */; };
 		9B352B671E26C33B0050CDF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B352B651E26C33B0050CDF9 /* Main.storyboard */; };
 		9B352B691E26C33B0050CDF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B352B681E26C33B0050CDF9 /* Assets.xcassets */; };
 		9B352B6C1E26C33B0050CDF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B352B6A1E26C33B0050CDF9 /* LaunchScreen.storyboard */; };
 		9B38E10B1E2C746C006BDF3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B38E10A1E2C746C006BDF3E /* AppDelegate.swift */; };
 		9B38E10D1E2C7ADB006BDF3E /* AssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B38E10C1E2C7ADB006BDF3E /* AssignmentTableViewCell.swift */; };
 		9B590C191E33E27500C0F0B6 /* EditClassIconCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B590C181E33E27500C0F0B6 /* EditClassIconCollectionViewController.swift */; };
+		9B61E27F1E4AAAD60086CEEE /* AboutPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B61E27E1E4AAAD60086CEEE /* AboutPageViewController.swift */; };
 		9B9C550B1E2DDFD400475F1B /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9C550A1E2DDFD400475F1B /* Class.swift */; };
 		9BB374211E29475300B3F5FE /* Assignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB374201E29475300B3F5FE /* Assignment.swift */; };
 		9BB374271E2BD87700B3F5FE /* AssignmentPickClassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB374261E2BD87700B3F5FE /* AssignmentPickClassViewController.swift */; };
@@ -49,6 +51,7 @@
 /* Begin PBXFileReference section */
 		9B086CA81E33DD36001B6B5D /* EditClassIconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditClassIconCollectionViewCell.swift; sourceTree = "<group>"; };
 		9B13D94B1E3151B200DBA3F7 /* ClassDetailViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassDetailViewViewController.swift; sourceTree = "<group>"; };
+		9B209DFF1E3A705B0099E71A /* EditExistingAssignmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditExistingAssignmentViewController.swift; path = ../EditExistingAssignmentViewController.swift; sourceTree = "<group>"; };
 		9B352B5E1E26C33B0050CDF9 /* HW Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HW Reminder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B352B661E26C33B0050CDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9B352B681E26C33B0050CDF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,6 +60,7 @@
 		9B38E10A1E2C746C006BDF3E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B38E10C1E2C7ADB006BDF3E /* AssignmentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentTableViewCell.swift; sourceTree = "<group>"; };
 		9B590C181E33E27500C0F0B6 /* EditClassIconCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditClassIconCollectionViewController.swift; sourceTree = "<group>"; };
+		9B61E27E1E4AAAD60086CEEE /* AboutPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutPageViewController.swift; sourceTree = "<group>"; };
 		9B9C550A1E2DDFD400475F1B /* Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = SOURCE_ROOT; };
 		9BB374201E29475300B3F5FE /* Assignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Assignment.swift; path = ../Assignment.swift; sourceTree = "<group>"; };
 		9BB374261E2BD87700B3F5FE /* AssignmentPickClassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignmentPickClassViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 		9B352B601E26C33B0050CDF9 /* HW Reminder */ = {
 			isa = PBXGroup;
 			children = (
+				9B209DFF1E3A705B0099E71A /* EditExistingAssignmentViewController.swift */,
 				9BF5AD1E1E2FDA43003E948C /* AddAlertViewController.swift */,
 				9BF5AD181E2FD343003E948C /* AlertsListTableViewController.swift */,
 				9BDDB1721E2EA5A9007A2F29 /* AddAnAssignmentDetailViewController.swift */,
@@ -115,6 +120,7 @@
 				9B9C550A1E2DDFD400475F1B /* Class.swift */,
 				9BB374261E2BD87700B3F5FE /* AssignmentPickClassViewController.swift */,
 				9B352B651E26C33B0050CDF9 /* Main.storyboard */,
+				9B61E27E1E4AAAD60086CEEE /* AboutPageViewController.swift */,
 				9B086CA81E33DD36001B6B5D /* EditClassIconCollectionViewCell.swift */,
 				9B590C181E33E27500C0F0B6 /* EditClassIconCollectionViewController.swift */,
 				9BF5AD1A1E2FD397003E948C /* Alert.swift */,
@@ -215,8 +221,10 @@
 			files = (
 				9BB374211E29475300B3F5FE /* Assignment.swift in Sources */,
 				9B38E10D1E2C7ADB006BDF3E /* AssignmentTableViewCell.swift in Sources */,
+				9B61E27F1E4AAAD60086CEEE /* AboutPageViewController.swift in Sources */,
 				9B9C550B1E2DDFD400475F1B /* Class.swift in Sources */,
 				9BF6E8DC1E2E8A9200DE7CC7 /* ManageClasssesTableViewController.swift in Sources */,
+				9B209E001E3A705B0099E71A /* EditExistingAssignmentViewController.swift in Sources */,
 				9B086CA91E33DD36001B6B5D /* EditClassIconCollectionViewCell.swift in Sources */,
 				9BF6E8D81E2E7DC700DE7CC7 /* AddAssignmentCollectionViewController.swift in Sources */,
 				9BF6E8DA1E2E867900DE7CC7 /* ClassSelectionCollectionViewCell.swift in Sources */,
